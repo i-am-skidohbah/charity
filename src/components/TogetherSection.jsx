@@ -42,7 +42,7 @@ function TogetherSection() {
           <button className="bg-lime-400 text-black font-semibold rounded-full px-4 py-1 mb-1 text-sm flex items-center gap-2 shadow transition hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-300">
             {data.missionTitle}
           </button>
-          <p className="text-gray-700 text-sm md:text-base text-center md:text-left text-justify max-w-xl">
+          <p className="text-gray-700 text-sm md:text-base  text-center md:text-left text-justify max-w-xl">
             {data.missionText}
           </p>
         </div>
@@ -62,7 +62,7 @@ function TogetherSection() {
           >
             {data.visionTitle}
           </button>
-          <p className="text-gray-700 text-sm md:text-base text-center md:text-left text-justify max-w-xl">
+          <p className="text-gray-700 text-sm md:text-base text-justify text-center md:text-left text-justify max-w-xl">
             {data.visionText}
           </p>
         </div>

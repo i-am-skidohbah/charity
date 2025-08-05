@@ -6,7 +6,7 @@ import AboutUs from './pages/AboutUs';
 import OurCauses from './pages/OurCauses';
 import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
-import MoreCauses from './components/MoreCauses';
+import CauseDetails from './pages/CauseDetails' ;
 
 function AppRoutes() {
   return (
@@ -15,10 +15,11 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/causes" element={<OurCauses />} />
+        <Route path="/causes/:id" element={<CauseDetails />} />
+
         <Route path="/get-involved" element={<GetInvolved />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/more" element={<MoreCauses />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>

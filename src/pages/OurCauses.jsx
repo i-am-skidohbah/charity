@@ -4,7 +4,7 @@ import JoinUsFooterSection from '../components/JoinUsFooterSection';
 import DonateModal from '../components/DonateModal'; // Import the modal
 import { db } from '../firebase';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const TABS = [
   { label: 'All Causes', value: 'all' },
@@ -24,6 +24,8 @@ function OurCauses() {
   const [page, setPage] = useState(1);
   const pageSize = 3; // Show 3 causes per page
   const [showDonate, setShowDonate] = useState(false); // Modal state
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCauses() {
@@ -144,7 +146,7 @@ function OurCauses() {
             <div
               key={cause.id}
               className="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow-lg p-6 md:p-8 gap-6 cursor-pointer"
-              onClick={() => window.location.href = "/more"}
+              onClick={() => navigate(`/causes/${cause.id}`)}
             >
               <img
                 src={cause.image}
@@ -153,10 +155,15 @@ function OurCauses() {
               />
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-xl md:text-2xl text-black font-bold mb-2">{cause.title}</h2>
-                <p className="mb-4 text-gray-700">{cause.desc}</p>
+                <p className="dec mb-4 text-gray-700">
+                  {cause.desc && cause.desc.split(" ").length > 15
+                    ? cause.desc.split(" ").slice(0, 15).join(" ") + "..."
+                    : cause.desc}
+                </p>
                 <Link
-                  to="/more"
+                  to={`/causes/${cause.id}`}
                   className="koko inline-block bg-[#1253a2] !text-white font-semibold rounded-full px-6 py-2 shadow hover:bg-blue-900 transition"
+                  onClick={e => e.stopPropagation()}
                 >
                   Learn more
                 </Link>

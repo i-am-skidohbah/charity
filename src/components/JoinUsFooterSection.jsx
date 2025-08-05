@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import DonateModal from './DonateModal'; // Import the modal
+import Footer from './Footer';
 
 function JoinUsFooterSection() {
   const [data, setData] = useState(null);
@@ -88,7 +89,7 @@ function JoinUsFooterSection() {
             © {new Date().getFullYear()} Ossai Kingsley Foundation
           </span>
         </div>
-        <div className="flex gap-1 sm:gap-2 md:gap-6 items-center">
+        {/* <div className="flex gap-1 sm:gap-2 md:gap-6 items-center">
           <a
             href="https://instagram.com/ossaikingsleyfoundation"
             className="text-white hover:text-lime-400 text-sm sm:text-base md:text-lg"
@@ -99,11 +100,12 @@ function JoinUsFooterSection() {
           </a>
           <span className="text-[10px] sm:text-xs md:text-sm text-blue-100 hidden sm:inline">@ossaikingsleyfoundation</span>
           <span className="text-[10px] sm:text-xs md:text-sm text-blue-100 hidden sm:inline">ossaikingsleyfoundation@gmail.com</span>
-        </div>
+        </div> */}
       </footer>
     </section>
       {/* Donate Modal */}
     <DonateModal open={showDonate} onClose={() => setShowDonate(false)} />
+      <Footer />
     </>
   );
 }

@@ -94,7 +94,7 @@ function DonateModal({ open, onClose }) {
               ...(window.innerWidth < 768 ? { minHeight: "520px" } : {}),
             }}
           >
-            {/* Step 1: Donation Amount */}
+            {/* Step 1: Donor Details (now first) */}
             <div
               className={`absolute inset-0 w-full h-full transition-transform duration-500 ${step === 1 ? 'z-10' : 'z-0'}`}
               style={{
@@ -104,61 +104,67 @@ function DonateModal({ open, onClose }) {
                 background: "white",
               }}
             >
-              <h3 className="font-bold text-lg mb-4 text-gray-800 text-center">Secure donation</h3>
-              <div className="flex gap-2 mb-4">
+              <h3 className="font-bold text-lg mb-4 text-gray-700 text-center">Enter your details</h3>
+              <form className="flex flex-col gap-3 text-gray-700" onSubmit={e => { e.preventDefault(); setStep(2); }}>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First name"
+                  value={details.firstName}
+                  onChange={handleDetailsChange}
+                  className="border border-gray-300 rounded-lg px-4 py-2"
+                  required
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last name"
+                  value={details.lastName}
+                  onChange={handleDetailsChange}
+                  className="border border-gray-300 rounded-lg px-4 py-2"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email address"
+                  value={details.email}
+                  onChange={handleDetailsChange}
+                  className="border border-gray-300 rounded-lg px-4 py-2"
+                  required
+                />
+                <div className="flex items-center border border-gray-300 rounded-lg px-2 py-2">
+                  <span className="mr-2">🇳🇬</span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone (optional)"
+                    value={details.phone}
+                    onChange={handleDetailsChange}
+                    className="flex-1 outline-none border-none bg-transparent"
+                  />
+                  <span className="ml-2 text-gray-400" title="Optional">?</span>
+                </div>
+                <label className="flex items-center gap-2 text-sm mt-2">
+                  <input
+                    type="checkbox"
+                    name="agree"
+                    checked={details.agree}
+                    onChange={handleDetailsChange}
+                    className="accent-blue-600"
+                    required
+                  />
+                  I agree to the <a href="#" className="underline">Terms of Service</a>.
+                </label>
                 <button
-                  className={`flex-1 border rounded-full px-3 py-1 font-semibold ${donation.frequency === "Once" ? "border-blue-400 bg-blue-50 text-blue-700" : "border-gray-300 text-gray-700"}`}
-                  onClick={() => setDonation({ ...donation, frequency: "Once" })}
-                  type="button"
+                  type="submit"
+                  className="bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg px-4 py-3 w-full text-lg shadow transition mt-2"
                 >
-                  <span>❤️</span> Give once
+                  Continue
                 </button>
-                <button
-                  className={`flex-1 border rounded-full px-3 py-1 font-semibold ${donation.frequency === "Monthly" ? "border-blue-400 bg-blue-50 text-blue-700" : "border-gray-300 text-gray-700"}`}
-                  onClick={() => setDonation({ ...donation, frequency: "Monthly" })}
-                  type="button"
-                >
-                  Monthly
-                </button>
-              </div>
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {["₦30K", "₦50K", "₦80K", "₦150K", "₦200K", "₦250K"].map((amt) => (
-                  <button
-                    key={amt}
-                    type="button"
-                    className="border border-gray-300 rounded-lg py-2 font-semibold text-gray-700 hover:bg-blue-50 transition"
-                    onClick={() => handleDonationAmount(amt)}
-                  >
-                    {amt}
-                  </button>
-                ))}
-              </div>
-              <input
-                type="text"
-                name="amount"
-                placeholder="₦ 70,000"
-                value={donation.amount}
-                onChange={handleDonationChange}
-                className="border border-gray-300 text-gray-700 rounded-lg px-4 py-2 mb-2 w-full font-semibold text-lg"
-              />
-              <select
-                name="currency"
-                value={donation.currency}
-                onChange={handleDonationChange}
-                className="border border-gray-300 text-gray-700 rounded-lg px-3 py-2 mb-4 w-full"
-              >
-                <option>NGN</option>
-              </select>
-              <button
-                className="bg-blue-700 hover:bg-blue-800  text-white font-bold rounded-lg px-4 py-3 w-full text-lg shadow transition"
-                onClick={() => setStep(2)}
-                type="button"
-                disabled={!donation.amount}
-              >
-                Continue
-              </button>
+              </form>
             </div>
-            {/* Step 2: Donor Details */}
+            {/* Step 2: Donation Amount (now second) */}
             <div
               className={`absolute inset-0 w-full h-full transition-transform duration-500 ${step === 2 ? 'z-10' : 'z-0'}`}
               style={{
@@ -180,68 +186,41 @@ function DonateModal({ open, onClose }) {
                 <span className="hidden sm:inline">Back</span>
               </button>
               {!done ? (
-                <>
-                  <h3 className="font-bold text-lg mb-4 text-gray-700 text-center">Enter your details</h3>
+                <div className="pt-7 m-5">
+                  <h3 className="font-bold text-lg mb-4 text-gray-800 text-center">Secure donation</h3>
                   <form className="flex flex-col gap-3 text-gray-700" onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="First name"
-                      value={details.firstName}
-                      onChange={handleDetailsChange}
-                      className="border border-gray-300 rounded-lg px-4 py-2"
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="lastName"
-                      placeholder="Last name"
-                      value={details.lastName}
-                      onChange={handleDetailsChange}
-                      className="border border-gray-300 rounded-lg px-4 py-2"
-                      required
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email address"
-                      value={details.email}
-                      onChange={handleDetailsChange}
-                      className="border border-gray-300 rounded-lg px-4 py-2"
-                      required
-                    />
-                    <div className="flex items-center border border-gray-300 rounded-lg px-2 py-2">
-                      <span className="mr-2">🇳🇬</span>
-                      <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone (optional)"
-                        value={details.phone}
-                        onChange={handleDetailsChange}
-                        className="flex-1 outline-none border-none bg-transparent"
-                      />
-                      <span className="ml-2 text-gray-400" title="Optional">?</span>
+                    
+                    <div className=" rounded bg-gray-50 p-6 items-center gap-2 mb-2">
+                      <h3 className="text-2xl font-bold">1307280465</h3>
+                      <h3 className="text-x font-bold">Ossai kingsley foundation</h3>
+                      <h3 className="text-2xl">Providus Bank</h3>
                     </div>
-                    <label className="flex items-center gap-2 text-sm mt-2">
-                      <input
-                        type="checkbox"
-                        name="agree"
-                        checked={details.agree}
-                        onChange={handleDetailsChange}
-                        className="accent-blue-600"
-                        required
-                      />
-                      I agree to the <a href="#" className="underline">Terms of Service</a>.
-                    </label>
+                    <input
+                      type="text"
+                      name="amount"
+                      placeholder="₦ 70,000"
+                      value={donation.amount}
+                      onChange={handleDonationChange}
+                      className="border border-gray-300 text-gray-700 rounded-lg px-4 py-2 mb-2 w-full font-semibold text-lg"
+                      required
+                    />
+                    <select
+                      name="currency"
+                      value={donation.currency}
+                      onChange={handleDonationChange}
+                      className="border border-gray-300 text-gray-700 rounded-lg px-3 py-2 mb-4 w-full"
+                    >
+                      <option>NGN</option>
+                    </select>
                     <button
                       type="submit"
                       className="bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg px-4 py-3 w-full text-lg shadow transition mt-2"
-                      disabled={submitting}
+                      disabled={submitting || !donation.amount}
                     >
-                      {submitting ? "Submitting..." : "Continue"}
+                      {submitting ? "Submitting..." : "Donate"}
                     </button>
                   </form>
-                </>
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="text-3xl mb-2 text-lime-500">🎉</div>

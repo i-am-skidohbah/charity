@@ -113,7 +113,7 @@ function GetInvolved() {
         <h1 className="text-3xl md:text-5xl font-bold text-[#1253a2] mb-4 text-center">
           {data.heroTitle || "Get Involved"}
         </h1>
-        <p className="max-w-2xl text-lg md:text-xl text-gray-700 text-center">
+        <p className="max-w-2xl text-lg md:text-xl text-justify text-gray-700 text-center">
           {data.heroText ||
             "Join us in making a difference! Whether you want to volunteer, partner, or support our mission, your involvement helps us create lasting impact in communities."}
         </p>

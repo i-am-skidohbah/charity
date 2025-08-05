@@ -215,7 +215,21 @@ function OurCausesAdmin() {
         <input
           type="file"
           accept="image/*"
-          onChange={handleImageUpload}
+          multiple
+          onChange={async (e) => {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            setUploading(true);
+            const urls = [];
+            for (const file of files) {
+              const storageRef = ref(storage, `osb/causes/${Date.now()}_${file.name}`);
+              await uploadBytes(storageRef, file);
+              const url = await getDownloadURL(storageRef);
+              urls.push(url);
+            }
+            setForm((prev) => ({ ...prev, image: urls }));
+            setUploading(false);
+          }}
           className="border rounded px-2 py-1 flex-1 text-black bg-white"
         />
         <select
@@ -354,7 +368,14 @@ function OurCausesAdmin() {
             <tbody>
               {causes.map((cause) => (
                 <tr key={cause.id} className="border-b hover:bg-gray-100">
-                  <td className="py-2 px-3"><img src={cause.image} alt="cause" className="w-20 h-12 object-cover rounded" /></td>
+                  <td className="py-2 px-3">
+                    {Array.isArray(cause.image)
+                      ? cause.image.map((img, idx) => (
+                          <img key={idx} src={img} alt="cause" className="pics w-20 h-12 object-cover rounded mb-1" />
+                        ))
+                      : <img src={cause.image} alt="cause" className="pics w-20 h-12 object-cover rounded" />
+                    }
+                  </td>
                   <td className="py-2 px-3 text-gray-900">{cause.title}</td>
                   <td className="py-2 px-3 text-gray-700">{cause.desc}</td>
                   <td className="py-2 px-3"><span className={`${cause.bg} px-2 py-1 rounded text-white`}>{cause.bg}</span></td>

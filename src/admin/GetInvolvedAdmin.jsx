@@ -44,7 +44,8 @@ function GetInvolvedAdmin() {
       const url = await getDownloadURL(storageRef);
       urls.push(url);
     }
-    setForm((prev) => ({ ...prev, gallery: urls }));
+    // Append new images to existing gallery
+    setForm((prev) => ({ ...prev, gallery: [...(prev.gallery || []), ...urls] }));
   };
 
   // Save page data

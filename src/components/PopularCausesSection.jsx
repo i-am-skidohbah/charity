@@ -52,7 +52,11 @@ function PopularCausesSection() {
               />
             </div>
             <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2 text-center">{cause.title}</h3>
-            <p className="text-gray-700 text-xs sm:text-sm text-center ">{cause.desc}</p>
+<p className="dec mb-4 text-gray-700">
+  {cause.desc && cause.desc.split(" ").length > 15
+    ? cause.desc.split(" ").slice(0, 15).join(" ") + "..."
+    : cause.desc}
+</p>
           </div>
         ))}
       </div>
