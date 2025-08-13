@@ -66,11 +66,11 @@ function DonateModal({ open, onClose }) {
         </button>
         {/* Left: Image & Message */}
         <div className="flex-1 flex flex-col items-center justify-center p-6 bg-gray-50">
-          <img
+          {/* <img
             src="/donate-hero.jpg"
             alt="Donate"
             className="w-full h-48 object-cover rounded-xl mb-4"
-          />
+          /> */}
           <div className="flex flex-col items-center">
             <img src="/logo.png" alt="Foundation Logo" className="h-10 mb-2" />
             <p className="text-gray-700 text-center mb-2">

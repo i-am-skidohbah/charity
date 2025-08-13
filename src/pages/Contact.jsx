@@ -4,6 +4,7 @@ import JoinUsFooterSection from "../components/JoinUsFooterSection";
 import { db } from "../firebase";
 import { doc, getDoc, collection, addDoc, Timestamp } from "firebase/firestore";
 
+
 function Contact() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -139,7 +140,7 @@ function Contact() {
               href={`tel:${data?.phone || "+2347069693926"}`}
               className="underline text-blue-700"
             >
-              {data?.phone || "+234 800 000 0000"}
+              {data?.phone || "+234 (0)70 6969 3926"}
             </a>
           </div>
           <div>

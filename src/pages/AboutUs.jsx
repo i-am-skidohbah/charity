@@ -18,24 +18,24 @@ function AboutUs() {
   const [showDonate, setShowDonate] = useState(false); // Modal state
 
   const form = useRef();
- 
 
-    const sendEmail = (e) => {
-      e.preventDefault();
 
-      emailjs.sendForm('service_pos52ih', 'template_ulall1o', form.current, {
-        publicKey: 'Lbk87TG8MuAsjx2rL',
-      })
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_pos52ih', 'template_ulall1o', form.current, {
+      publicKey: 'Lbk87TG8MuAsjx2rL',
+    })
       .then(() => {
         alert('Email sent successfully!');
       }, (error) => {
         alert('Failed to send email: ' + error.text);
       });
-      form.current.reset();
-    };
+    form.current.reset();
+  };
 
   useEffect(() => {
-      
+
 
 
     async function fetchAbout() {
@@ -310,8 +310,8 @@ function AboutUs() {
                 <div className="flex justify-center gap-8 mt-12">
                   <a href="https://facebook.com" aria-label="Facebook" className="hover:text-lime-400"><i className="fab fa-facebook-f text-2xl"></i></a>
                   <a href="https://twitter.com" aria-label="X" className="hover:text-lime-400"><i className="fab fa-x-twitter text-2xl"></i></a>
-                  <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:text-lime-400"><i className="fab fa-linkedin-in text-2xl"></i></a>
-                  <a href="https://instagram.com/ossaikingsleyfoundation" aria-label="Instagram" className="hover:text-lime-400"><i className="fab fa-instagram text-2xl"></i></a>
+                  <a href="https://www.linkedin.com/company/ossai-kingsley-foundation/" aria-label="LinkedIn" className="hover:text-lime-400"><i className="fab fa-linkedin-in text-2xl"></i></a>
+                  <a href="https://www.instagram.com/kngfoundation/profilecard/?igsh=MWR1ODh5bTFzMWpnNA==" aria-label="Instagram" className="hover:text-lime-400"><i className="fab fa-instagram text-2xl"></i></a>
                   <a href="https://youtube.com" aria-label="YouTube" className="hover:text-lime-400"><i className="fab fa-youtube text-2xl"></i></a>
                 </div>
               </div>
